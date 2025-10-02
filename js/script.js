@@ -96,6 +96,7 @@ $(document).ready(function () {
     }
   });
 
+    // Restart Quiz
   $("#restart-btn").click(function () {
     currentQuestion = 0;
     score = 0;
@@ -105,11 +106,30 @@ $(document).ready(function () {
     loadQuestion();
   });
 
-  // Start
+  $("#restart-btn").click(function () {
+  currentQuestion = 0;
+  score = 0;
+  $("#progress").removeClass("complete").css("width", "0"); // ✅ Reset progress bar
+  shuffledQuestions = shuffle([...questions]).map(q => shuffleOptions({ ...q }));
+  $("#result-box").addClass("hidden");
+  $("#quiz-box").removeClass("hidden");
   loadQuestion();
 });
 
 
 
+
+
+// End of Quiz
+function updateProgress() {
+  $("#progress-text").text(`Question ${currentQuestion + 1} of ${shuffledQuestions.length}`);
+  const percent = ((currentQuestion) / shuffledQuestions.length) * 100;
+  $("#progress").css("width", percent + "%");
+}
+
+
+  // Start
+  loadQuestion();
+});
 
 

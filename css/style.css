@@ -81,9 +81,3 @@ button:hover {
 .hidden {
   display: none;
 }
-
-function updateProgress() {
-  $("#progress-text").text(`Question ${currentQuestion + 1} of ${shuffledQuestions.length}`);
-  const percent = ((currentQuestion) / shuffledQuestions.length) * 100;
-  $("#progress").css("width", percent + "%");
-}
