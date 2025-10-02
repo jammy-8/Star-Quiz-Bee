@@ -92,7 +92,19 @@ $(document).ready(function () {
       $("#progress").css("width", "100%");
       $("#quiz-box").addClass("hidden");
       $("#result-box").removeClass("hidden");
-      $("#score").text(`${score} / ${shuffledQuestions.length}`);
+      const total = shuffledQuestions.length;
+const percentScore = (score / total) * 100;
+
+$("#score").removeClass("score-high score-medium score-low");
+
+if (percentScore >= 80) {
+  $("#score").addClass("score-high").text(`${score} / ${total} 🎉 Excellent!`);
+} else if (percentScore >= 50) {
+  $("#score").addClass("score-medium").text(`${score} / ${total} 🙂 Good job!`);
+} else {
+  $("#score").addClass("score-low").text(`${score} / ${total} 😢 Keep practicing!`);
+}
+
     }
   });
 
