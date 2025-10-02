@@ -65,3 +65,16 @@ $(document).ready(function () {
       $("#score").text(`${score} / ${questions.length}`);
     }
   });
+
+ $("#restart-btn").click(function () {
+    currentQuestion = 0;
+    score = 0;
+    $("#result-box").addClass("hidden");
+    $("#quiz-box").removeClass("hidden");
+    loadQuestion();
+  });
+
+  // Load first question
+  loadQuestion();
+});
+
