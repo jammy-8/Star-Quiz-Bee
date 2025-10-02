@@ -1,5 +1,4 @@
 $(document).ready(function () {
-  // 25 Questions
   const questions = [
     { q: "What is 2 + 2?", options: ["3", "4", "5", "6"], answer: 1 },
     { q: "Capital of France?", options: ["Berlin", "Madrid", "Paris", "Rome"], answer: 2 },
@@ -54,12 +53,11 @@ $(document).ready(function () {
 
   shuffledQuestions = shuffledQuestions.map(q => shuffleOptions({ ...q }));
 
- function updateProgress() {
+  function updateProgress() {
     $("#progress-text").text(`Question ${currentQuestion + 1} of ${shuffledQuestions.length}`);
     const percent = ((currentQuestion) / shuffledQuestions.length) * 100;
     $("#progress").css("width", percent + "%");
   }
-
 
   function loadQuestion() {
     updateProgress();
@@ -107,8 +105,11 @@ $(document).ready(function () {
     loadQuestion();
   });
 
+  // Start
   loadQuestion();
 });
+
+
 
 
 
