@@ -10,7 +10,7 @@ body {
 .quiz-container {
   background: white;
   padding: 20px;
-  width: 400px;
+  width: 420px;
   border-radius: 10px;
   box-shadow: 0 0 10px #ccc;
   text-align: center;
@@ -33,14 +33,13 @@ body {
 #progress {
   height: 100%;
   width: 0;
-  background: rgba(252, 157, 220, 0.898);
-  transition: width 0.3s ease;
+  background:  rgba(252, 157, 220, 0.898);
+  transition: width 0.3s ease, background 0.3s ease;
 }
 
 #progress.complete {
   background: #4caf50;
 }
-
 
 #quiz-box, #result-box {
   margin-top: 20px;
@@ -60,14 +59,14 @@ body {
 }
 
 #options li.selected {
-  background: rgba(252, 157, 220, 0.898);
+  background:  rgba(252, 157, 220, 0.898);
   color: white;
 }
 
 button {
   margin-top: 20px;
   padding: 10px 20px;
-  background: rgba(252, 157, 220, 0.898);
+  background:  rgba(252, 157, 220, 0.898);
   color: white;
   border: none;
   border-radius: 5px;
@@ -75,9 +74,27 @@ button {
 }
 
 button:hover {
-  background: rgba(252, 157, 220, 0.898)
+  background:  rgba(252, 157, 220, 0.898);
 }
 
 .hidden {
   display: none;
+}
+
+#score {
+  font-size: 20px;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.score-high {
+  color: #4caf50;
+}
+
+.score-medium {
+  color: #ff9800;
+}
+
+.score-low {
+  color: #f44336;
 }
