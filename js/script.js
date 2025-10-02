@@ -126,6 +126,7 @@ if (percentScore >= 80) {
   $("#result-box").addClass("hidden");
   $("#quiz-box").removeClass("hidden");
   loadQuestion();
+  $("#score").removeClass("score-high score-medium score-low").text("");
 });
 
 
