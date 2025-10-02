@@ -30,6 +30,7 @@ $(document).ready(function () {
   let currentQuestion = 0;
   let score = 0;
 
+  // Shuffle function
   function shuffle(array) {
     for (let i = array.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
@@ -38,8 +39,7 @@ $(document).ready(function () {
     return array;
   }
 
-  let shuffledQuestions = shuffle([...questions]);
-
+  // Shuffle options while keeping correct answer tracked
   function shuffleOptions(question) {
     const options = question.options.map((opt, index) => ({
       text: opt,
@@ -51,14 +51,16 @@ $(document).ready(function () {
     return question;
   }
 
-  shuffledQuestions = shuffledQuestions.map(q => shuffleOptions({ ...q }));
+  let shuffledQuestions = shuffle([...questions]).map(q => shuffleOptions({ ...q }));
 
+  // Update progress bar + text
   function updateProgress() {
     $("#progress-text").text(`Question ${currentQuestion + 1} of ${shuffledQuestions.length}`);
     const percent = ((currentQuestion) / shuffledQuestions.length) * 100;
     $("#progress").css("width", percent + "%");
   }
 
+  // Load a question
   function loadQuestion() {
     updateProgress();
     $("#question").text(shuffledQuestions[currentQuestion].q);
@@ -69,11 +71,13 @@ $(document).ready(function () {
     });
   }
 
+  // Select option
   $(document).on("click", "#options li", function () {
     $("#options li").removeClass("selected");
     $(this).addClass("selected");
   });
 
+  // Next button
   $("#next-btn").click(function () {
     const selected = $("#options li.selected").data("index");
     if (selected === undefined) {
@@ -89,60 +93,38 @@ $(document).ready(function () {
     if (currentQuestion < shuffledQuestions.length) {
       loadQuestion();
     } else {
-      $("#progress").css("width", "100%");
+      $("#progress").css("width", "100%").addClass("complete");
+
+      // Show score
+      const total = shuffledQuestions.length;
+      const percentScore = (score / total) * 100;
+      $("#score").removeClass("score-high score-medium score-low");
+
+      if (percentScore >= 80) {
+        $("#score").addClass("score-high").text(`${score} / ${total} 🎉 Excellent!`);
+      } else if (percentScore >= 50) {
+        $("#score").addClass("score-medium").text(`${score} / ${total} 🙂 Good job!`);
+      } else {
+        $("#score").addClass("score-low").text(`${score} / ${total} 😢 Keep practicing!`);
+      }
+
       $("#quiz-box").addClass("hidden");
       $("#result-box").removeClass("hidden");
-      const total = shuffledQuestions.length;
-const percentScore = (score / total) * 100;
-
-$("#score").removeClass("score-high score-medium score-low");
-
-if (percentScore >= 80) {
-  $("#score").addClass("score-high").text(`${score} / ${total} 🎉 Excellent!`);
-} else if (percentScore >= 50) {
-  $("#score").addClass("score-medium").text(`${score} / ${total} 🙂 Good job!`);
-} else {
-  $("#score").addClass("score-low").text(`${score} / ${total} 😢 Keep practicing!`);
-}
-
     }
   });
 
-    // Restart Quiz
+  // Restart button
   $("#restart-btn").click(function () {
     currentQuestion = 0;
     score = 0;
+    $("#progress").removeClass("complete").css("width", "0");
+    $("#score").removeClass("score-high score-medium score-low").text("");
     shuffledQuestions = shuffle([...questions]).map(q => shuffleOptions({ ...q }));
     $("#result-box").addClass("hidden");
     $("#quiz-box").removeClass("hidden");
     loadQuestion();
   });
 
-  $("#restart-btn").click(function () {
-  currentQuestion = 0;
-  score = 0;
-  $("#progress").removeClass("complete").css("width", "0"); // ✅ Reset progress bar
-  shuffledQuestions = shuffle([...questions]).map(q => shuffleOptions({ ...q }));
-  $("#result-box").addClass("hidden");
-  $("#quiz-box").removeClass("hidden");
-  loadQuestion();
-  $("#score").removeClass("score-high score-medium score-low").text("");
-});
-
-
-
-
-
-// End of Quiz
-function updateProgress() {
-  $("#progress-text").text(`Question ${currentQuestion + 1} of ${shuffledQuestions.length}`);
-  const percent = ((currentQuestion) / shuffledQuestions.length) * 100;
-  $("#progress").css("width", percent + "%");
-}
-
-
-  // Start
+  // Start quiz
   loadQuestion();
 });
-
-
