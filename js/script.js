@@ -31,7 +31,6 @@ $(document).ready(function () {
   let currentQuestion = 0;
   let score = 0;
 
-   // Shuffle function
   function shuffle(array) {
     for (let i = array.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
@@ -40,27 +39,29 @@ $(document).ready(function () {
     return array;
   }
 
-  // Deep copy and shuffle questions
   let shuffledQuestions = shuffle([...questions]);
 
-  // Shuffle options while keeping track of the correct answer
   function shuffleOptions(question) {
     const options = question.options.map((opt, index) => ({
       text: opt,
       isCorrect: index === question.answer
     }));
-
     shuffle(options);
-
     question.options = options.map(o => o.text);
     question.answer = options.findIndex(o => o.isCorrect);
-
     return question;
   }
 
   shuffledQuestions = shuffledQuestions.map(q => shuffleOptions({ ...q }));
 
+  function updateProgress() {
+    $("#progress-text").text(`Question ${currentQuestion + 1} of ${shuffledQuestions.length}`);
+    const percent = ((currentQuestion) / shuffledQuestions.length) * 100;
+    $("#progress").css("width", percent + "%");
+  }
+
   function loadQuestion() {
+    updateProgress();
     $("#question").text(shuffledQuestions[currentQuestion].q);
     $("#options").empty();
 
@@ -89,6 +90,7 @@ $(document).ready(function () {
     if (currentQuestion < shuffledQuestions.length) {
       loadQuestion();
     } else {
+      $("#progress").css("width", "100%");
       $("#quiz-box").addClass("hidden");
       $("#result-box").removeClass("hidden");
       $("#score").text(`${score} / ${shuffledQuestions.length}`);
@@ -104,8 +106,9 @@ $(document).ready(function () {
     loadQuestion();
   });
 
-  // Load first question
+ 
   loadQuestion();
 });
+
 
 
