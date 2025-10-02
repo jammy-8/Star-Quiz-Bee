@@ -31,11 +31,40 @@ $(document).ready(function () {
   let currentQuestion = 0;
   let score = 0;
 
+   // Shuffle function
+  function shuffle(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+  }
+
+  // Deep copy and shuffle questions
+  let shuffledQuestions = shuffle([...questions]);
+
+  // Shuffle options while keeping track of the correct answer
+  function shuffleOptions(question) {
+    const options = question.options.map((opt, index) => ({
+      text: opt,
+      isCorrect: index === question.answer
+    }));
+
+    shuffle(options);
+
+    question.options = options.map(o => o.text);
+    question.answer = options.findIndex(o => o.isCorrect);
+
+    return question;
+  }
+
+  shuffledQuestions = shuffledQuestions.map(q => shuffleOptions({ ...q }));
+
   function loadQuestion() {
-    $("#question").text(questions[currentQuestion].q);
+    $("#question").text(shuffledQuestions[currentQuestion].q);
     $("#options").empty();
 
-    questions[currentQuestion].options.forEach((opt, i) => {
+    shuffledQuestions[currentQuestion].options.forEach((opt, i) => {
       $("#options").append(`<li data-index="${i}">${opt}</li>`);
     });
   }
@@ -52,23 +81,24 @@ $(document).ready(function () {
       return;
     }
 
-    if (selected === questions[currentQuestion].answer) {
+    if (selected === shuffledQuestions[currentQuestion].answer) {
       score++;
     }
 
     currentQuestion++;
-    if (currentQuestion < questions.length) {
+    if (currentQuestion < shuffledQuestions.length) {
       loadQuestion();
     } else {
       $("#quiz-box").addClass("hidden");
       $("#result-box").removeClass("hidden");
-      $("#score").text(`${score} / ${questions.length}`);
+      $("#score").text(`${score} / ${shuffledQuestions.length}`);
     }
   });
 
- $("#restart-btn").click(function () {
+  $("#restart-btn").click(function () {
     currentQuestion = 0;
     score = 0;
+    shuffledQuestions = shuffle([...questions]).map(q => shuffleOptions({ ...q }));
     $("#result-box").addClass("hidden");
     $("#quiz-box").removeClass("hidden");
     loadQuestion();
@@ -77,4 +107,5 @@ $(document).ready(function () {
   // Load first question
   loadQuestion();
 });
+
 
