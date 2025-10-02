@@ -13,7 +13,7 @@ It can be used as a game to make a presentation fun, or a quiz for a class of st
   - Each question is randomized and all the options in every question is randomized in every retry.
 - Once a different player opens the game in a different site or the game be refreshed/restarted, it will provide a randomized set of question and options to make it more fun and interesting.
   
-![Random Questions and Options](assets\images\1.png)
+![Random Questions and Options](assets/images/1.png)
 
 - ___Progress Bar___ -
   
