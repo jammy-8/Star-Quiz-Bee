@@ -1,41 +1,38 @@
 <!DOCTYPE html>
-<html lang=""en>   
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Star Quiz Bee</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Star Quiz Bee</title>
+  <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
-    <div class="quiz-container">
-        <h1>Quiz</h1>
-
-    <div class="quiz-container">
+  <div class="quiz-container">
     <h1>Quiz</h1>
+
+    <!-- Progress bar -->
     <div id="progress-text"></div>
     <div id="progress-bar">
-    <div id="progress"></div>
+      <div id="progress"></div>
     </div>
 
-
-    <div id=""quiz-box">
-    <p id="questions"></p>
-    <ul id="options"></ul>
-    <button id="next-btn" onclick="nextQuestion()">Next</button>
+    <!-- Quiz box -->
+    <div id="quiz-box">
+      <p id="question"></p>
+      <ul id="options"></ul>
+      <button id="next-btn">Next</button>
     </div>
 
+    <!-- Result box -->
     <div id="result-box" class="hidden">
-        <p>Your Score:</p>
-        <button id="restart-btn" onclick="restartQuiz()">Restart Quiz</button>
+      <h2>Your Score:</h2>
+      <p id="score"></p>
+      <button id="restart-btn">Restart Quiz</button>
     </div>
+  </div>
 
-    </div>
-
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="script.js"></script>
-
-
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
