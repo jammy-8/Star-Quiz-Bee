@@ -6,7 +6,7 @@ $(document).ready(function () {
     { q: "HTML stands for?", options: ["Hyper Trainer Markup Language", "HyperText Markup Language", "HighText Machine Language", "None"], answer: 1 },
     { q: "CSS is used for?", options: ["Styling", "Programming", "Database", "OS"], answer: 0 },
     { q: "jQuery is a?", options: ["Library", "Language", "Database", "Framework"], answer: 0 },
-    { q: "Which tag is used for JavaScript?", options: ["<js>", "<javascript>", "<script>", "<code>"], answer: 2 },
+    { q: "Which tag is used for JavaScript?", options: ["< js >", "< javascript >", "< script >", "< code >"], answer: 2 },
     { q: "5 * 6 = ?", options: ["11", "30", "25", "60"], answer: 1 },
     { q: "Who developed Python?", options: ["Guido van Rossum", "James Gosling", "Linus Torvalds", "Bill Gates"], answer: 0 },
     { q: "Which is not a programming language?", options: ["Java", "C++", "HTML", "Python"], answer: 2 },
