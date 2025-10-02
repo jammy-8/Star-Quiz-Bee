@@ -54,11 +54,12 @@ $(document).ready(function () {
 
   shuffledQuestions = shuffledQuestions.map(q => shuffleOptions({ ...q }));
 
-  function updateProgress() {
+ function updateProgress() {
     $("#progress-text").text(`Question ${currentQuestion + 1} of ${shuffledQuestions.length}`);
     const percent = ((currentQuestion) / shuffledQuestions.length) * 100;
     $("#progress").css("width", percent + "%");
   }
+
 
   function loadQuestion() {
     updateProgress();
@@ -106,7 +107,6 @@ $(document).ready(function () {
     loadQuestion();
   });
 
- 
   loadQuestion();
 });
 

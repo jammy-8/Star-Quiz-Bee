@@ -37,6 +37,10 @@ body {
   transition: width 0.3s ease;
 }
 
+#progress.complete {
+  background: #4caf50;
+}
+
 
 #quiz-box, #result-box {
   margin-top: 20px;
